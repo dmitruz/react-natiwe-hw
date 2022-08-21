@@ -9,31 +9,52 @@ import {
   Platform,
   KeyboardAvoidingView,
   Keyboard,
+  TouchableWithoutFeedback,
  } from 'react-native';
+
+ const initialState={
+  email: '',
+  password: ''
+ }
 
 export default function App() {
 console.log(Platform.OS)
-const [isKeyboardOpen, setIsKeyboardopen] = useState(false);
+const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+const [state, setState] = useState(initialState);
 
 const keyboardHide = () => {
-  setIsKeyboardopen(false);
+  setIsKeyboardOpen(false);
   Keyboard.dismiss();
+  console.log(state);
+  setState(initialState);
 }
   return (
+    <TouchableWithoutFeedback onPress={keyboardHide}>
     <View style={styles.container}>
+      
     <KeyboardAvoidingView 
-    behavior={Platform.OS == "ios" ? "padding" : "height"}>
+    behavior={Platform.OS === "ios" ? "padding" : "height"}>
     <View style={{...styles.form, marginBottom: isKeyboardOpen ? 20 : 100}}>
+    <View style={styles.header}>
+      <Text style={styles.headerTitle}>Hello again</Text> 
+      <Text style={styles.headerTitle}>Welcome back</Text>
+    </View>
       <View>
         <Text style={styles.inputTitle}>EMAIL</Text>
-        <TextInput style={styles.input} textAlign={"center"} onFocus={() => setIsKeyboardopen(true)} />
+        <TextInput style={styles.input}
+         textAlign={"center"} 
+         onFocus={() => setIsKeyboardOpen(true)} 
+         value={state.email}
+         nChangeText={(value) => setState((prevState) => ({...prevState, email: value}) )} />
       </View>
        <View style={{marginTop: 20}}>
         <Text style={styles.inputTitle}>PASSWORD</Text>
         <TextInput style={styles.input} 
         textAlign={"center"}
         secureTextEntry={true}
-         onFocus={() => setIsKeyboardopen(true)} />
+         onFocus={() => setIsKeyboardOpen(true)} 
+         value={state.password}
+         onChangeText={(value) => setState((prevState) => ({...prevState, password: value}) )}/>
       </View>
       <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
         <Text style={styles.btnTitle}>SIGN IN</Text>
@@ -41,6 +62,7 @@ const keyboardHide = () => {
     </View>
     </KeyboardAvoidingView>
     </View>
+    </TouchableWithoutFeedback>
    
   );
 }
@@ -58,11 +80,11 @@ const styles = StyleSheet.create({
     
     height: 40,
     borderRadius: 6,
-    color: "blue"
+    color: "blue",
 
   },
   from: {
-    marginHorizontal: 40
+    marginHorizontal: 40,
   },
   inputTitle: {
     color: "red",
@@ -82,16 +104,24 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         backgroundColor: "transparent",
-        borderColor: "#f0f8ff"
+        borderColor: "#f0f8ff",
       },
       android: {
         backgroundColor: "#4169e1",
-        borderColor: "transparent"
+        borderColor: "transparent",
       }
     })
   },
   btnTitle: {
     color: Platform.OS === "ios" ? "#4169el" : "#fof8ff",
-    fontSize: 18
+    fontSize: 18,
+  },
+  header: {
+    alignItems: "center",
+    marginBottom: 150,
+  },
+  headerTitle: {
+    fontSize: 30,
+    color: "red",
   }
 });
