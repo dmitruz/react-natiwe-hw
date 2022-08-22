@@ -12,91 +12,134 @@ import {
   TouchableWithoutFeedback,
  } from 'react-native';
 
- const initialState={
-  email: '',
-  password: ''
- }
+ 
+import * as Font from "expo-font";
+import { AppLoading } from "expo";
+
+const initialState = {
+  email: "",
+  password: "",
+};
+
+const loadApplication = async () => {
+  await Font.loadAsync({
+    "Heebo-Regular": require("./fonts/Heebo-Regular.ttf"),
+  });
+};
 
 export default function App() {
-console.log(Platform.OS)
-const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
-const [state, setState] = useState(initialState);
+  console.log(Platform.OS);
+  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+  const [state, setstate] = useState(initialState);
+  const [iasReady, setIasReady] = useState(false);
 
-const keyboardHide = () => {
-  setIsKeyboardOpen(false);
-  Keyboard.dismiss();
-  console.log(state);
-  setState(initialState);
-}
+  const keyboardHide = () => {
+    setIsShowKeyboard(false);
+    Keyboard.dismiss();
+    console.log(state);
+    setstate(initialState);
+  };
+
+  if (!iasReady) {
+    return (
+      <AppLoading
+        startAsync={loadApplication}
+        onFinish={() => setIasReady(true)}
+        onError={console.warn}
+      />
+    );
+  }
+
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
-    <View style={styles.container}>
-      
-    <KeyboardAvoidingView 
-    behavior={Platform.OS === "ios" ? "padding" : "height"}>
-    <View style={{...styles.form, marginBottom: isKeyboardOpen ? 20 : 100}}>
-    <View style={styles.header}>
-      <Text style={styles.headerTitle}>Hello again</Text> 
-      <Text style={styles.headerTitle}>Welcome back</Text>
-    </View>
-      <View>
-        <Text style={styles.inputTitle}>EMAIL</Text>
-        <TextInput style={styles.input}
-         textAlign={"center"} 
-         onFocus={() => setIsKeyboardOpen(true)} 
-         value={state.email}
-         nChangeText={(value) => setState((prevState) => ({...prevState, email: value}) )} />
+      <View style={styles.container}>
+        
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+          >
+            <View
+              style={{
+                ...styles.form,
+                marginBottom: isShowKeyboard ? 20 : 150,
+              }}
+            >
+              <View style={styles.header}>
+                <Text style={styles.headerTitle}>Hello again</Text>
+                <Text style={styles.headerTitle}>Welcome back</Text>
+              </View>
+              <View>
+                <Text style={styles.inputTitle}>EMAIL ADDRES</Text>
+                <TextInput
+                  style={styles.input}
+                  textAlign={"center"}
+                  onFocus={() => setIsShowKeyboard(true)}
+                  value={state.email}
+                  onChangeText={(value) =>
+                    setstate((prevState) => ({ ...prevState, email: value }))
+                  }
+                />
+              </View>
+              <View style={{ marginTop: 20 }}>
+                <Text style={styles.inputTitle}>PASSWORD</Text>
+                <TextInput
+                  style={styles.input}
+                  textAlign={"center"}
+                  secureTextEntry={true}
+                  onFocus={() => setIsShowKeyboard(true)}
+                  value={state.password}
+                  onChangeText={(value) =>
+                    setstate((prevState) => ({ ...prevState, password: value }))
+                  }
+                />
+              </View>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles.btn}
+                onPress={keyboardHide}
+              >
+                <Text style={styles.btnTitle}>SIGN IN</Text>
+              </TouchableOpacity>
+            </View>
+          </KeyboardAvoidingView>
+        
       </View>
-       <View style={{marginTop: 20}}>
-        <Text style={styles.inputTitle}>PASSWORD</Text>
-        <TextInput style={styles.input} 
-        textAlign={"center"}
-        secureTextEntry={true}
-         onFocus={() => setIsKeyboardOpen(true)} 
-         value={state.password}
-         onChangeText={(value) => setState((prevState) => ({...prevState, password: value}) )}/>
-      </View>
-      <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-        <Text style={styles.btnTitle}>SIGN IN</Text>
-      </TouchableOpacity>
-    </View>
-    </KeyboardAvoidingView>
-    </View>
     </TouchableWithoutFeedback>
-   
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    //alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "flex-end",
+    // justifyContent: "center",
+    // alignItems: "center",
   },
   input: {
     borderWidth: 1,
-    borderColor: "#212121",
-    
+    borderColor: "#f0f8ff",
     height: 40,
     borderRadius: 6,
-    color: "blue",
 
+    color: "#f0f8ff",
   },
-  from: {
+  form: {
     marginHorizontal: 40,
   },
   inputTitle: {
-    color: "red",
-    marginBottom: 20,
-    fontSize: 18
+    color: "#f0f8ff",
+    marginBottom: 10,
+    fontSize: 18,
+    fontFamily: "Heebo-Regular",
   },
   btn: {
-    backgroundColor: Platform.OS === 'ios' ? 'transparent' : "#4169e1",
-    height: 40,
     borderRadius: 6,
-    borderWidt: 1,
-    borderColor: Platform.OS === "ios" ? "#212121" : "transparent",
+    borderWidth: 1,
+    height: 40,
     marginTop: 40,
     justifyContent: "center",
     alignItems: "center",
@@ -109,12 +152,13 @@ const styles = StyleSheet.create({
       android: {
         backgroundColor: "#4169e1",
         borderColor: "transparent",
-      }
-    })
+      },
+    }),
   },
   btnTitle: {
-    color: Platform.OS === "ios" ? "#4169el" : "#fof8ff",
+    color: Platform.OS === "ios" ? "#4169e1" : "#f0f8ff",
     fontSize: 18,
+    fontFamily: "Heebo-Regular",
   },
   header: {
     alignItems: "center",
@@ -122,6 +166,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 30,
-    color: "red",
-  }
+    color: "#f0f8ff",
+    fontFamily: "Heebo-Regular",
+  },
 });
