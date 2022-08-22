@@ -13,8 +13,8 @@ import {
  } from 'react-native';
 
  
-import * as Font from "expo-font";
-//import { AppLoading } from "expo";
+import * as Font from 'expo-font';
+import AppLoading from "expo-app-loading";
 
 const initialState = {
   email: "",
@@ -23,7 +23,7 @@ const initialState = {
 
 const loadApplication = async () => {
   await Font.loadAsync({
-    "Heebo-Regular": require("./assets/fonts/"),
+    'RobotoMono-Regular': require('./assets/fonts/RobotoMono-Regular.ttf'),
   });
 };
 
@@ -31,7 +31,7 @@ export default function App() {
   console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setstate] = useState(initialState);
-  //const [iasReady, setIasReady] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -40,6 +40,15 @@ export default function App() {
     setstate(initialState);
   };
 
+  if (!isReady) {
+    return (
+      <AppLoading
+      startAsync={loadApplication}
+      onFinish={() => setIsReady(true)}
+      onError={console.warn}
+      />
+    );
+  }
  
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
