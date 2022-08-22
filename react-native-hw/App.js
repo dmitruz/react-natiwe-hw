@@ -14,7 +14,7 @@ import {
 
  
 import * as Font from "expo-font";
-import { AppLoading } from "expo";
+//import { AppLoading } from "expo";
 
 const initialState = {
   email: "",
@@ -23,7 +23,7 @@ const initialState = {
 
 const loadApplication = async () => {
   await Font.loadAsync({
-    "Heebo-Regular": require("./fonts/Heebo-Regular.ttf"),
+    "Heebo-Regular": require("./assets/fonts/"),
   });
 };
 
@@ -31,7 +31,7 @@ export default function App() {
   console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setstate] = useState(initialState);
-  const [iasReady, setIasReady] = useState(false);
+  //const [iasReady, setIasReady] = useState(false);
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -40,16 +40,7 @@ export default function App() {
     setstate(initialState);
   };
 
-  if (!iasReady) {
-    return (
-      <AppLoading
-        startAsync={loadApplication}
-        onFinish={() => setIasReady(true)}
-        onError={console.warn}
-      />
-    );
-  }
-
+ 
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <View style={styles.container}>
@@ -112,26 +103,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
-  image: {
-    flex: 1,
-    resizeMode: "cover",
-    justifyContent: "flex-end",
-    // justifyContent: "center",
-    // alignItems: "center",
-  },
+ 
   input: {
     borderWidth: 1,
     borderColor: "#f0f8ff",
     height: 40,
     borderRadius: 6,
 
-    color: "#f0f8ff",
+    color: "blue",
   },
   form: {
     marginHorizontal: 40,
   },
   inputTitle: {
-    color: "#f0f8ff",
+    color: "blue",
     marginBottom: 10,
     fontSize: 18,
     fontFamily: "Heebo-Regular",
@@ -156,7 +141,7 @@ const styles = StyleSheet.create({
     }),
   },
   btnTitle: {
-    color: Platform.OS === "ios" ? "#4169e1" : "#f0f8ff",
+    color: Platform.OS === "ios" ? "#4169e1" : "blue",
     fontSize: 18,
     fontFamily: "Heebo-Regular",
   },
@@ -166,7 +151,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 30,
-    color: "#f0f8ff",
+    color: "blue",
     fontFamily: "Heebo-Regular",
   },
 });
