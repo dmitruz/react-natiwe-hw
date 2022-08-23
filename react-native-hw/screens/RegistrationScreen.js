@@ -11,6 +11,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   Dimensions,
+  ImageBackground,
  } from 'react-native';
 
  
@@ -40,7 +41,7 @@ export default function RegistrationScreen() {
   useEffect(() => {
     const onChange = () => {
       const width = Dimensions.get('window').width - 20 * 2;
-      console.log("width", width);
+      setDimensions(width);
     };
     Dimensions.addEventListener("change", onChange);
     return () => {
@@ -68,7 +69,10 @@ export default function RegistrationScreen() {
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <View style={styles.container}>
-        
+        <ImageBackground
+        style={styles.image}
+        source={require("../assets/img/backgroundTwo.jpg")}
+        >
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
           >
@@ -81,7 +85,8 @@ export default function RegistrationScreen() {
             >
               <View style={styles.header}>
                 
-                <Text style={styles.headerTitle}>New user? Please Sign up</Text>
+                <Text style={styles.headerTitle}>New user?</Text>
+                <Text style={styles.headerTitle}>Please Sign Up!</Text>
               </View>
               <View>
                 <Text style={styles.inputTitle}>USER NAME</Text>
@@ -130,7 +135,7 @@ export default function RegistrationScreen() {
               </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
-        
+        </ImageBackground>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -140,23 +145,30 @@ export default function RegistrationScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "fff",
     alignItems: "center",
   },
  
+   image: {
+      flex: 1,
+      resizeMode: "cover",
+      justifyContent: "flex-end",
+      alignItems: "center",
+    },
+
   input: {
     borderWidth: 1,
     borderColor: "#f0f8ff",
     height: 40,
     borderRadius: 6,
 
-    color: "blue",
+    color: "#fff",
   },
   form: {
     marginHorizontal: 40,
   },
   inputTitle: {
-    color: "blue",
+    color: "#fff",
     marginBottom: 10,
     fontSize: 18,
     fontFamily: "RobotoMongo-Regular",
@@ -181,7 +193,7 @@ const styles = StyleSheet.create({
     }),
   },
   btnTitle: {
-    color: Platform.OS === "ios" ? "#4169e1" : "blue",
+    color: Platform.OS === "ios" ? "#4169e1" : "#fff",
     fontSize: 18,
     fontFamily: "RobotoMongo-Regular",
   },
@@ -191,7 +203,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 30,
-    color: "blue",
+    color: "#fff",
     fontFamily: "RobotoMongo-Regular",
   },
 });

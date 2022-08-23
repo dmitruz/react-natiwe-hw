@@ -12,6 +12,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   Dimensions,
+  ImageBackground,
  } from 'react-native';
 
  
@@ -22,12 +23,12 @@ const initialState = {
   email: "",
   password: "",
 };
-
 const loadApplication = async () => {
   await Font.loadAsync({
     'RobotoMono-Regular': require('./assets/fonts/RobotoMono-Regular.ttf'),
   });
 };
+
 
 export default function LoginScreen() {
   console.log(Platform.OS);
@@ -40,7 +41,7 @@ export default function LoginScreen() {
   useEffect(() => {
     const onChange = () => {
       const width = Dimensions.get('window').width - 20 * 2;
-      console.log("width", width);
+      setDimensions(width);
     };
     Dimensions.addEventListener("change", onChange);
     return () => {
@@ -68,7 +69,10 @@ export default function LoginScreen() {
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <View style={styles.container}>
-        
+        <ImageBackground
+        style={styles.image}
+        source={require("../assets/img/backgroundTwo.jpg")}
+        >
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
           >
@@ -117,7 +121,7 @@ export default function LoginScreen() {
               </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
-        
+        </ImageBackground>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -127,26 +131,31 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "fff",
     alignItems: "center",
   },
- 
+    image: {
+      flex: 1,
+      resizeMode: "cover",
+      justifyContent: "flex-end",
+      alignItems: "center",
+    }, 
   input: {
     borderWidth: 1,
     borderColor: "#f0f8ff",
     height: 40,
     borderRadius: 6,
 
-    color: "blue",
+    color: "#fff",
   },
   form: {
     marginHorizontal: 40,
   },
   inputTitle: {
-    color: "blue",
+    color: "#fff",
     marginBottom: 10,
     fontSize: 18,
-    fontFamily: "RobotoMongo-Regular",
+    
   },
   btn: {
     borderRadius: 6,
@@ -168,9 +177,9 @@ const styles = StyleSheet.create({
     }),
   },
   btnTitle: {
-    color: Platform.OS === "ios" ? "#4169e1" : "blue",
+    color: Platform.OS === "ios" ? "#4169e1" : "#fff",
     fontSize: 18,
-    fontFamily: "RobotoMongo-Regular",
+    
   },
   header: {
     alignItems: "center",
@@ -178,7 +187,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 30,
-    color: "blue",
-    fontFamily: "RobotoMongo-Regular",
+    color: "#fff",
+    
   },
 });
