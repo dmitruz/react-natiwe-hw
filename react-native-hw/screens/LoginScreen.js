@@ -16,36 +16,28 @@ import {
  } from 'react-native';
 
  
-import * as Font from "expo-font";
-import AppLoading from "expo-app-loading";
-
 const initialState = {
   email: "",
   password: "",
 };
-const loadApplication = async () => {
-  await Font.loadAsync({
-    'RobotoMono-Regular': require('./assets/fonts/RobotoMono-Regular.ttf'),
-  });
-};
-
 
 export default function LoginScreen() {
   console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setstate] = useState(initialState);
-  const [isReady, setIsReady] = useState(false);
 
-  const [dimensions, setDimensions] = useState(Dimensions.get("window").width - 20 * 2);
+  const [dimensions, setdimensions] = useState(
+    Dimensions.get("window").width - 20 * 2
+  );
 
   useEffect(() => {
     const onChange = () => {
-      const width = Dimensions.get('window').width - 20 * 2;
-      setDimensions(width);
+      const width = Dimensions.get("window").width - 20 * 2;
+      setdimensions(width);
     };
     Dimensions.addEventListener("change", onChange);
     return () => {
-      Dimensions.removeEventListener("change", onChange)
+      Dimensions.removeEventListener("change", onChange);
     };
   }, []);
 
@@ -56,22 +48,12 @@ export default function LoginScreen() {
     setstate(initialState);
   };
 
-  if (!isReady) {
-    return (
-      <AppLoading
-      startAsync={loadApplication}
-      onFinish={() => setIsReady(true)}
-      onError={console.warn}
-      />
-    );
-  }
- 
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <View style={styles.container}>
         <ImageBackground
-        style={styles.image}
-        source={require("../assets/img/backgroundTwo.jpg")}
+          style={styles.image}
+          source={require("../assets/img/backgroundTwo.jpg")}
         >
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -88,12 +70,14 @@ export default function LoginScreen() {
                 <Text style={styles.headerTitle}>Welcome back</Text>
               </View>
               <View>
-                <Text style={styles.inputTitle}>EMAIL</Text>
+                <Text style={styles.inputTitle}>EMAIL ADDRES</Text>
                 <TextInput
                   style={styles.input}
+                  name="hola"
                   textAlign={"center"}
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.email}
+                  onChange={(nativeEvent) => console.log(nativeEvent)}
                   onChangeText={(value) =>
                     setstate((prevState) => ({ ...prevState, email: value }))
                   }
