@@ -2,10 +2,11 @@ import React, { useState, useEffect} from "react";
 import {} from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
-import LoginScreen from "./screens/LoginScreen"
-import RegistrationScreen from "./screens/RegistrationScreen";
+import LoginScreen from "./screens/auth/LoginScreen"
+import RegistrationScreen from "./screens/auth/RegistrationScreen";
 
 const loadApplication = async () => {
   await Font.loadAsync({
@@ -14,6 +15,7 @@ const loadApplication = async () => {
 };
 
 const AuthStack = createStackNavigator();
+const MainTab = createStackNavigator();
 
 export default function App () {
 const [isReady, setIsReady] = useState(false);
@@ -30,8 +32,21 @@ const [isReady, setIsReady] = useState(false);
   return (
 <NavigationContainer>
 <AuthStack.Navigator>
-    <AuthStack.Screen name="Register" component={RegistrationScreen} />
-    <AuthStack.Screen name="Login" component={LoginScreen} />
+  <AuthStack.Screen 
+    options={{
+      headerShown: false,
+    }}
+    name="Login"
+    component={LoginScreen}
+    />
+    <AuthStack.Screen 
+    options={{
+      headerShown: false,
+    }}
+    name="Registration"
+    component={RegistrationScreen}
+    />
+    
 </AuthStack.Navigator>
 </NavigationContainer>
 

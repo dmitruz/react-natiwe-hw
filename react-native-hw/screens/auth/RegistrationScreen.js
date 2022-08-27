@@ -30,7 +30,7 @@ const loadApplication = async () => {
   });
 };
 
-export default function RegistrationScreen() {
+export default function RegistrationScreen({ navigation }) {
   console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setstate] = useState(initialState);
@@ -71,7 +71,7 @@ export default function RegistrationScreen() {
       <View style={styles.container}>
         <ImageBackground
         style={styles.image}
-        source={require("../assets/img/backgroundTwo.jpg")}
+        source={require("../../assets/img/backgroundTwo.jpg")}
         >
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -133,6 +133,20 @@ export default function RegistrationScreen() {
               >
                 <Text style={styles.btnTitle}>SIGN UP</Text>
               </TouchableOpacity>
+              <TouchableOpacity
+              onPress={() => navigation.navigate("Registration")}
+              style={{
+                marginTop: 20,
+                alignSelf: "center",
+              }}
+              >
+                <Text style={{ color: "#fff" }}>
+                  New ro application?{" "}
+                  <Text style={{ fontSize: 20, color: "#ff6347" }}>
+                    Sign In
+                  </Text>
+                </Text>
+                </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
         </ImageBackground>

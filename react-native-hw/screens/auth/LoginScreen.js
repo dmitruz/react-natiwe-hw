@@ -21,8 +21,8 @@ const initialState = {
   password: "",
 };
 
-export default function LoginScreen() {
-  console.log(Platform.OS);
+export default function LoginScreen({navigation}) {
+  console.log("navigation", navigation);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setstate] = useState(initialState);
 
@@ -55,7 +55,7 @@ export default function LoginScreen() {
       <View style={styles.container}>
         <ImageBackground
           style={styles.image}
-          source={require("../assets/img/backgroundTwo.jpg")}
+          source={require("../../assets/img/backgroundTwo.jpg")}
         >
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -105,6 +105,20 @@ export default function LoginScreen() {
               >
                 <Text style={styles.btnTitle}>SIGN IN</Text>
               </TouchableOpacity>
+              <TouchableOpacity
+              onPress={() => navigation.navigate("Registration")}
+              style={{
+                marginTop: 20,
+                alignSelf: "center",
+              }}
+              >
+                <Text style={{ color: "#fff" }}>
+                  New ro application?{" "}
+                  <Text style={{ fontSize: 20, color: "#ff6347" }}>
+                    Sign Up
+                  </Text>
+                </Text>
+                </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
         </ImageBackground>
