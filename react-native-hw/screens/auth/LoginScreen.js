@@ -13,6 +13,7 @@ import {
   TouchableWithoutFeedback,
   Dimensions,
   ImageBackground,
+  Button,
  } from 'react-native';
 
  
@@ -113,7 +114,7 @@ export default function LoginScreen({navigation}) {
               }}
               >
                 <Text style={{ color: "#fff" }}>
-                  New ro application?{" "}
+                  New to application?{" "}
                   <Text style={{ fontSize: 20, color: "#ff6347" }}>
                     Sign Up
                   </Text>

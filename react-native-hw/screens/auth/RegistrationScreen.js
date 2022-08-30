@@ -12,11 +12,11 @@ import {
   TouchableWithoutFeedback,
   Dimensions,
   ImageBackground,
+  Button,
  } from 'react-native';
 
  
-import * as Font from "expo-font";
-import AppLoading from "expo-app-loading";
+
 
 const initialState = {
   name: "",
@@ -24,17 +24,13 @@ const initialState = {
   password: "",
 };
 
-const loadApplication = async () => {
-  await Font.loadAsync({
-    'RobotoMono-Regular': require('./assets/fonts/RobotoMono-Regular.ttf'),
-  });
-};
+
 
 export default function RegistrationScreen({ navigation }) {
   console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setstate] = useState(initialState);
-  const [isReady, setIsReady] = useState(false);
+  
 
   const [dimensions, setDimensions] = useState(Dimensions.get("window").width - 20 * 2);
 
@@ -185,7 +181,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     marginBottom: 10,
     fontSize: 18,
-    fontFamily: "RobotoMongo-Regular",
+    //fontFamily: "RobotoMono-Regular",
   },
   btn: {
     borderRadius: 6,
@@ -209,7 +205,7 @@ const styles = StyleSheet.create({
   btnTitle: {
     color: Platform.OS === "ios" ? "#4169e1" : "#fff",
     fontSize: 18,
-    fontFamily: "RobotoMongo-Regular",
+    //fontFamily: "RobotoMono-Regular",
   },
   header: {
     alignItems: "center",
@@ -218,6 +214,6 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 30,
     color: "#fff",
-    fontFamily: "RobotoMongo-Regular",
+   // fontFamily: "RobotoMono-Regular",
   },
 });
