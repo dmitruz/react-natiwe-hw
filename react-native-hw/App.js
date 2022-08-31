@@ -1,15 +1,10 @@
 import React, { useState, useEffect} from "react";
 import {} from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
 //import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
-import LoginScreen from "./screens/auth/LoginScreen"
-import RegistrationScreen from "./screens/auth/RegistrationScreen";
-import CreateScreen from "./screens/mainScreen/CreateScreen";
-import PostsScreen from "./screens/mainScreen/PostsScreen";
-import ProfileScreen from "./screens/mainScreen/ProfileScreen";
+import { useRoute } from "./Router";
 
 const loadApplication = async () => {
   await Font.loadAsync({
@@ -17,34 +12,22 @@ const loadApplication = async () => {
   });
 };
 
-const AuthStack = createStackNavigator();
-const MainTab = createBottomTabNavigator();
-
-
 
 export default function App() {
-  const [isReady, setIasReady] = useState(false);
-
+  const [isReady, setIsReady] = useState(false);
+  const routing = useRoute({});
   if (!isReady) {
     return (
       <AppLoading
         startAsync={loadApplication}
-        onFinish={() => setIasReady(true)}
+        onFinish={() => setIsReady(true)}
         onError={console.warn}
       />
     );
   }
-  return (
-    <NavigationContainer>
-    <MainTab.Navigator>
-      <MainTab.Screen name="Posts" component={PostsScreen} />
-       <MainTab.Screen name="Create" component={CreateScreen} />
-        <MainTab.Screen name="Profile" component={ProfileScreen} />
-    </MainTab.Navigator>
-    </NavigationContainer>
-  );
-}
 
+  return <NavigationContainer>{routing}</NavigationContainer>;
+}
 
 
 
