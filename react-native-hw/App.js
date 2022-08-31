@@ -7,9 +7,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AppLoading from "expo-app-loading";
 import LoginScreen from "./screens/auth/LoginScreen"
 import RegistrationScreen from "./screens/auth/RegistrationScreen";
-//import CreateScreen from "./screens/mainScreen/CreateScreen";
-//import PostsScreen from "./screens/mainScreen/PostsScreen";
-//import ProfileScreen from "./screens/mainScreen/ProfileScreen";
+import CreateScreen from "./screens/mainScreen/CreateScreen";
+import PostsScreen from "./screens/mainScreen/PostsScreen";
+import ProfileScreen from "./screens/mainScreen/ProfileScreen";
 
 const loadApplication = async () => {
   await Font.loadAsync({
@@ -36,22 +36,11 @@ export default function App() {
   }
   return (
     <NavigationContainer>
-      <AuthStack.Navigator>
-        <AuthStack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="Login"
-          component={LoginScreen}
-        />
-        <AuthStack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="Register"
-          component={RegistrationScreen}
-        />
-      </AuthStack.Navigator>
+    <MainTab.Navigator>
+      <MainTab.Screen name="Posts" component={PostsScreen} />
+       <MainTab.Screen name="Create" component={CreateScreen} />
+        <MainTab.Screen name="Profile" component={ProfileScreen} />
+    </MainTab.Navigator>
     </NavigationContainer>
   );
 }
