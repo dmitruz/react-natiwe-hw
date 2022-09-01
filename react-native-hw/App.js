@@ -12,7 +12,6 @@ const loadApplication = async () => {
   });
 };
 
-
 export default function App() {
   const [isReady, setIsReady] = useState(false);
   const routing = useRoute({});
@@ -28,24 +27,3 @@ export default function App() {
 
   return <NavigationContainer>{routing}</NavigationContainer>;
 }
-
-
-
-
-
-// <AuthStack.Navigator>
-// <AuthStack.Screen
-//   options={{
-//     headerShown: false,
-//   }}
-//   name="Login"
-//   component={LoginScreen}
-// />
-// <AuthStack.Screen
-//   options={{
-//     headerShown: false,
-//   }}
-//   name="Register"
-//   component={RegisterScreen}
-// />
-// </AuthStack.Navigator>

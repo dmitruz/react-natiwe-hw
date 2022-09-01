@@ -137,7 +137,7 @@ export default function RegistrationScreen({ navigation }) {
               }}
               >
                 <Text style={{ color: "#fff" }}>
-                  New ro application?{" "}
+                  New to application?{" "}
                   <Text style={{ fontSize: 20, color: "#ff6347" }}>
                     Sign In
                   </Text>

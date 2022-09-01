@@ -9,7 +9,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 //import * as Font from "expo-font";
 import LoginScreen from "./screens/auth/LoginScreen"
 import RegistrationScreen from "./screens/auth/RegistrationScreen";
-import CreateScreen from "./screens/mainScreen/CreateScreen";
+import CreatePostsScreen from "./screens/mainScreen/CreatePostsScreen";
 import PostsScreen from "./screens/mainScreen/PostsScreen";
 import ProfileScreen from "./screens/mainScreen/ProfileScreen";
 
@@ -59,7 +59,7 @@ export const useRoute = (isAuth) => {
           ),
         }}
         name="Create"
-        component={CreateScreen}
+        component={PostsScreen}
       />
       <MainTab.Screen
         options={{
