@@ -59,7 +59,7 @@ export const useRoute = (isAuth) => {
           ),
         }}
         name="Create"
-        component={PostsScreen}
+        component={CreatePostsScreen}
       />
       <MainTab.Screen
         options={{
