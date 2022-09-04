@@ -1,14 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 
-const PostsScreen = () => {
-    return (
-        <View style={styles.container}>
-            <Text>PostsScreen</Text>
-        </View>
-
-    );
-}
+const PostsScreen = ({ route }) => {
+    const [posts, setPosts] = useState([]);
+    console.log("route.params", route.params);
+ 
+   useEffect(() => {
+    if (route.params) {
+      setPosts((prevState) => [...prevState, route.params]);
+    }
+  }, [route.params]);
+  console.log("posts", posts);
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={posts}
+        keyExtractor={(item, indx) => indx.toString()}
+        renderItem={({ item }) => (
+          <View
+            style={{
+              marginBottom: 10,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Image
+              source={{ uri: item.photo }}
+              style={{ width: 350, height: 200 }}
+            />
+          </View>
+        )}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
     container: {
