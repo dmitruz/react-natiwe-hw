@@ -2,7 +2,7 @@ import React, { useState, useEffect} from "react";
 import {} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
-//import * as Font from "expo-font";
+import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 import { useRoute } from "./Router";
 
