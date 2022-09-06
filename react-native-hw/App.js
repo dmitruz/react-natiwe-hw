@@ -3,8 +3,10 @@ import {} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
 import * as Font from "expo-font";
-import AppLoading from "expo-app-loading";
+import AppLoading from 'expo-app-loading';
 import { useRoute } from "./Router";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
 
 const loadApplication = async () => {
   await Font.loadAsync({
@@ -25,5 +27,8 @@ export default function App() {
     );
   }
 
-  return <NavigationContainer>{routing}</NavigationContainer>;
+  return 
+  <Provider store={store}>
+    <NavigationContainer>{routing}</NavigationContainer>;
+    </Provider>
 }
