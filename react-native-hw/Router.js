@@ -2,9 +2,6 @@ import React from "react";
 import {} from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-const AuthStack = createStackNavigator();
-const MainTab = createBottomTabNavigator();
-
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 //import * as Font from "expo-font";
 import LoginScreen from "./screens/auth/LoginScreen"
@@ -16,6 +13,9 @@ import ProfileScreen from "./screens/mainScreen/ProfileScreen";
 import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 import { AntDesign } from "@expo/vector-icons";
+
+const AuthStack = createStackNavigator();
+const MainTab = createBottomTabNavigator();
 
 
 export const useRoute = (isAuth) => {
