@@ -14,14 +14,15 @@ import {
   ImageBackground,
   Button,
  } from 'react-native';
+import { useDispatch } from "react-redux";
 
  
 
 
 const initialState = {
-  name: "",
   email: "",
   password: "",
+  nickname: "",
 };
 
 
@@ -30,6 +31,8 @@ export default function RegistrationScreen({ navigation }) {
   console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setstate] = useState(initialState);
+
+  const dispatch = useDispatch();
   
 
   const [dimensions, setDimensions] = useState(Dimensions.get("window").width - 20 * 2);
@@ -45,25 +48,18 @@ export default function RegistrationScreen({ navigation }) {
     };
   }, []);
 
-  const keyboardHide = () => {
+  const handleSubmit = () => {
     setIsShowKeyboard(false);
-    Keyboard.dismiss();
-    console.log(state);
+    keyboardHide.dismiss();
+
+    dispatch(authSignUpUser(state));
     setstate(initialState);
   };
 
-  if (!isReady) {
-    return (
-      <AppLoading
-      startAsync={loadApplication}
-      onFinish={() => setIsReady(true)}
-      onError={console.warn}
-      />
-    );
-  }
+  
  
   return (
-    <TouchableWithoutFeedback onPress={keyboardHide}>
+    <TouchableWithoutFeedback onPress={handleSubmit}>
       <View style={styles.container}>
         <ImageBackground
         style={styles.image}
@@ -85,7 +81,7 @@ export default function RegistrationScreen({ navigation }) {
                 <Text style={styles.headerTitle}>Please Sign Up!</Text>
               </View>
               <View>
-                <Text style={styles.inputTitle}>USER NAME</Text>
+                <Text style={styles.inputTitle}>NICKNAME</Text>
                 <TextInput
                   style={styles.input}
                   textAlign={"center"}
@@ -110,7 +106,7 @@ export default function RegistrationScreen({ navigation }) {
                 />
               </View>
               <View style={{ marginTop: 20 }}>
-                <Text style={styles.inputTitle}>USER PASSWORD</Text>
+                <Text style={styles.inputTitle}>PASSWORD</Text>
                 <TextInput
                   style={styles.input}
                   textAlign={"center"}

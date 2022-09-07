@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState } from "react";
 import {} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -10,25 +10,27 @@ import { Provider } from "react-redux";
 
 const loadApplication = async () => {
   await Font.loadAsync({
-    "RobotoMono-Regular": require("./assets/fonts/RobotoMono-Regular.ttf"),
+    "Roboto-Regular": require("./expo-font/Roboto-Regular.ttf"),
   });
 };
 
 export default function App() {
-  const [isReady, setIsReady] = useState(false);
-  const routing = useRoute({});
-  if (!isReady) {
+  const [iasReady, setIasReady] = useState(false);
+  const routing = useRoute(false);
+
+  if (!iasReady) {
     return (
       <AppLoading
         startAsync={loadApplication}
-        onFinish={() => setIsReady(true)}
+        onFinish={() => setIasReady(true)}
         onError={console.warn}
       />
     );
   }
 
-  return 
-  <Provider store={store}>
-    <NavigationContainer>{routing}</NavigationContainer>;
+  return (
+    <Provider store={store}>
+      <NavigationContainer>{routing}</NavigationContainer>
     </Provider>
+  );
 }
