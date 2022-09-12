@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, FlatList, Image, Button } from "react-native";
+import db from "../../firebase/config";
 
 const DefaultScreenPosts = ({ route, navigation }) => {
   const [posts, setPosts] = useState([]);
-  console.log("route.params", route.params);
+  
+  const getAllPosts = async () => {
+    await db
+    .firestore()
+    .collection("posts")
+    .onSnapshot((data) => 
+    setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id })))
+    );
+  };
 
   useEffect(() => {
-    if (route.params) {
-      setPosts((prevState) => [...prevState, route.params]);
-    }
-  }, [route.params]);
-  console.log("posts", posts);
+    getAllPosts();
+  }, []);
+  
   return (
     <View style={styles.container}>
       <FlatList
@@ -28,13 +35,24 @@ const DefaultScreenPosts = ({ route, navigation }) => {
               source={{ uri: item.photo }}
               style={{ width: 350, height: 200 }}
             />
+          
+        <View>
+          <Text>{item.comment}</Text>
+          </View>
+         <View>
+              <Button
+                title="go to map"
+                onPress={() =>
+                  navigation.navigate("Map", { location: item.location })
+                }
+              />
+              <Button
+                title="go to Comments"
+                onPress={() => navigation.navigate("Comments")}
+              />
+            </View>
           </View>
         )}
-      />
-      <Button title="go to map" onPress={() => navigation.navigate("Map")} />
-      <Button
-        title="go to Comments"
-        onPress={() => navigation.navigate("Comments")}
       />
     </View>
   );
