@@ -2,6 +2,10 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+const AuthStack = createStackNavigator();
+const MainTab = createBottomTabNavigator();
+
 //import * as Font from "expo-font";
 import LoginScreen from "./screens/auth/LoginScreen"
 import RegistrationScreen from "./screens/auth/RegistrationScreen";
@@ -13,8 +17,6 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 import { AntDesign } from "@expo/vector-icons";
 
-const AuthStack = createStackNavigator();
-const MainTab = createBottomTabNavigator();
 
 
 export const useRoute = (isAuth) => {
