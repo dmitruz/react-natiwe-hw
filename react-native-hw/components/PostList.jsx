@@ -15,7 +15,7 @@ import { doc, updateDoc } from "firebase/firestore";
 
 import { db } from '../firebase/config';
 
-export function PostsList({ posts }) {
+export function PostList({ posts }) {
   const windowWidth = useWindowDimensions().width;
   const windowHeight = useWindowDimensions().height;
 

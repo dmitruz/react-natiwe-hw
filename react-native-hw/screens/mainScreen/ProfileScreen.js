@@ -6,7 +6,7 @@ import { collection, onSnapshot, orderBy, query, where } from 'firebase/firestor
 
 import { db } from '../../firebase/config';
 import { authSignOutUser } from '../../redux/auth/authOperations';
-import { PostsList } from '../../components';
+import { PostList } from '../../components';
 import { AvatarContainer } from '../../components';
 
 const BG = '../../assets/images/PhotoBG.png';
@@ -64,7 +64,7 @@ export function ProfileScreen() {
             {userName}
           </Text>
 
-          <PostsList posts={userPosts} />
+          <PostList posts={userPosts} />
 
         </View>
       </ImageBackground>

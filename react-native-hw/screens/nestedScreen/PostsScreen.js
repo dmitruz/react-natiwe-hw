@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 
 import { db } from '../../firebase/config';
-import { PostsList } from '../../components';
+import { PostList } from '../../components';
 
 const defaultAvatar = '../../assets/images/default-avatar.png';
 
@@ -54,7 +54,7 @@ export function PostsScreen () {
         </View>
       </View>
 
-      <PostsList posts={posts} />
+      <PostList posts={posts} />
 
     </View>
   )

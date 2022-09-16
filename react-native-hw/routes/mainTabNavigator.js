@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { Ionicons, Feather } from '@expo/vector-icons';
 
-import { HomeScreen, CreatePostScreen, ProfileScreen } from '../screens/main';
+import { HomeScreen, CreatePostScreen, ProfileScreen } from "../screens/mainScreen";
 import GoBackButton from '../components/GoBackButton';
 
 const MainTab = createBottomTabNavigator();
@@ -69,7 +69,7 @@ export function MainTabNavigator() {
       />
       <MainTab.Screen
         name='Create'
-        component={CreatePostScreen}
+        component={CreatePostsScreen}
         options={{
           title: 'Создать публикацию',
           headerStyle: { borderBottomColor: '#B3B3B3', borderBottomWidth: 1 },
